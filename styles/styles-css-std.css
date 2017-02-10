@@ -1,0 +1,530 @@
+body {
+	font-family: monospace;
+	font-size: 18px;  
+	color: #000;  
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: url('../images/handmadepaper.png') repeat 0 0;
+}
+
+body *{
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;	
+	-ms-user-select: none;	
+}
+
+p{
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
+
+img {
+	display: block;  	
+}
+
+.layer-container{
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+
+#container {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	width: 1920px;
+	height: 1000px;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+#container.parallaxing{
+	overflow: hidden;
+	scroll: none;	
+}
+
+#scene{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.layer{
+	width: 100%;
+	height: 100%;
+}
+
+
+/* animation properties */ 
+.fader{
+	filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+.fadeIn{
+	 filter: alpha(opacity=100);
+	 opacity: 1;
+	 -webkit-transition: opacity .75s ease-in;
+     -moz-transition: opacity .75s ease-in;
+     -ms-transition: opacity .75s ease-in;
+     -o-transition: opacity .75s ease-in;
+     transition: opacity .75s ease-in;
+}
+
+.fadeOut{
+	 filter: alpha(opacity=0);
+	 opacity: 0;
+	 -webkit-transition: opacity .25s ease-in-out;
+     -moz-transition: opacity .25s ease-in-out;
+     -ms-transition: opacity .25s ease-in-out;
+     -o-transition: opacity .25s ease-in-out;
+     transition: opacity .25s ease-in-out;
+}
+
+@-webkit-keyframes wobble {
+	0, 100% { -webkit-transform: translate3D(0,-10px,0);    }
+	50%   { -webkit-transform: translate3D(0,10px,0);  }
+}
+
+@keyframes wobble {
+	0, 100% { transform: translate3D(0,-10px,0);    }
+	50%   { transform: translate3D(0,10px,0);  }
+}
+
+#LoadMessage{			
+	-webkit-animation-name: wobble;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-play-state: running;	
+	animation-name: wobble;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-play-state: running;
+}
+
+/* Common Scene Properties */
+
+
+#Sky,
+#Us,
+#PinesForegroundLeft,
+#PinesForegroundRight,
+#Flowers,
+#Flowers2,
+#Mountain,
+#Mountain2,
+#Cabin{
+	position: absolute;
+	overflow: hidden;
+}
+
+#Us img,
+#PinesForegroundLeft img,
+#PinesForegroundRight img,
+#Flowers img,
+#Flowers2 img,
+#Cabin img,
+#Mountain img,
+#Mountain2 img{
+	width: 100%;
+	height: auto;
+}
+
+#Sky img{
+	width: 100%;
+	height: 100%;
+}
+
+
+#STD{
+	position: absolute;
+	font-size: 50px;
+	text-transform: uppercase;
+	font-family: Montserrat, Arial;
+	color: #000;
+	text-shadow: 2px 2px 5px rgba(0,0,0,0.3);	
+	zoom: 1.7;		   
+	-ms-zoom: 1.7;
+}
+
+#STD span{
+	font-family: "Special Elite";	
+	font-size: 37px;
+	line-height: 30px;
+	color: #000;	
+	display: block;
+	position: relative;
+	top: 7px; 
+	left: 0;
+	letter-spacing: -0.3px;
+}
+
+#STD I{ 
+	font-style: normal;	
+	font-family: Chango, Arial;		
+	display: block;
+	font-size: 90px;
+	line-height: 80px;	
+}
+
+#STD DIV{
+	position: relative;
+	top: -10px;	
+}
+
+#STD B{	
+	font-weight: 700;	
+	font-size: 50px;
+	line-height: 20px;
+	font-family: "Fredoka One";	
+	position: relative;
+	top: 2px; 
+	left: 0;
+}
+
+#STD P{
+	line-height: 20px;
+}
+
+#Who{
+	position: absolute;
+	font-size: 65px;
+	text-align: right;
+	line-height: 80px;
+	text-shadow: 2px 2px 5px rgba(0,0,0,0.3);		
+	font-family: "Alex Brush";
+	font-weight: 900;
+	zoom: 1.5;
+	-ms-zoom: 1.5;
+}
+
+#Heart{
+	display: inline-block;
+	position: relative;
+	top: 8px;
+ 	left: 4px;
+}
+
+#Where{
+	zoom: 1.45;
+	-ms-zoom: 1.45;
+	position: absolute;
+	font-size: 70px;
+	font-family: "Cutive Mono";	
+	text-transform: uppercase;
+	font-weight: 900;
+	line-height: 47px;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);	
+}
+
+#Where span{
+	letter-spacing: -4.2px;
+}
+
+#Where b{
+	font-weight: normal;
+	font-family: Anton;	
+	font-size: 99px;
+	line-height: 2px;
+	text-transform: uppercase;
+}
+
+#Utah{
+	width: 340px;
+	margin-top: 3px;
+}
+
+
+/* Widescreen Screen (aspect ration > 1.5) properties */
+.widescreen #PinesForegroundRight{
+	right: 85%;
+	bottom: -22%;	
+	width: 30%;
+	height: 105%;
+}
+
+.widescreen #PinesForegroundLeft{
+	left: 83%;
+	bottom: -22%;
+	width: 34%;
+	height: 107%;	
+}
+
+.widescreen #Flowers{
+	left: 20%;
+	bottom: -14%;
+	width: 29%;
+	height: 19%;
+}
+
+.widescreen #Flowers2{
+	left: 53%;
+	bottom: -10%;
+	width: 27%;
+	height: 16%;
+}
+
+.widescreen #Cabin{
+	right: 3%;
+	top: 0%;
+	width: 49%;
+	height: 47%;
+}
+
+.widescreen #Us{
+	left: 34.5%;
+	bottom: 19%;	
+	width: 31%;
+	height: 50%;
+}
+
+.widescreen #Mountain{
+	left:0%;
+	top:7%;	
+	width: 65%;
+	height: 18%;
+}
+
+.widescreen #Mountain2{
+	left: 73%;
+	top: 4%;	
+	width: 85%;
+	height: 23.5%;
+}
+
+.widescreen #Sky{
+	left: 0%;	
+	top: -7%;
+	width: 100%;
+	height: 28%;
+}
+
+.widescreen #STD{
+	left: 11%;
+	bottom:37%;
+}
+
+.widescreen #Who{
+	left: 20%;
+	bottom: 13%;
+}
+
+.widescreen #Where{
+	left: 61%;
+	bottom: 38%;
+}
+
+/* Standard Screen (aspect ratio < 1.5 && > 1 ) properties */
+
+
+.standard #PinesForegroundRight{
+	right: 85%;
+	bottom: -13%;	
+}
+
+.standard #PinesForegroundLeft{
+	left: 83%;
+	bottom: -13%;	
+}
+
+.standard #Flowers{
+	left: 20%;
+	bottom: -10%;
+}
+
+.standard #Flowers2{
+	left: 53%;
+	bottom: -8%;
+}
+
+.standard #Cabin{
+	right: -4%;
+	top: 3%;
+	zoom: 1.25;
+	-ms-zoom: 1.25;
+}
+
+.standard #Us{
+	width: 700px;
+	left: calc(50% - 345px);
+	bottom: 25%;	
+}
+
+.standard #Sky{
+	left: 0%;	
+	top: 0%;
+}
+
+.standard #Mountain{
+	left:0%;
+	top:10%;	
+	width: 1920px;
+}
+
+.standard #Mountain2{
+	display: none;
+}
+
+.standard #STD{
+	left: 5%;
+	bottom:42%;
+	zoom: 2;
+	-ms-zoom: 2;
+}
+
+.standard #Who{
+	left: 20%;
+	bottom: 15%;
+}
+
+.standard #Where{
+	left: 62%;
+	bottom: 43%;
+	zoom: 1.8;
+	-ms-zoom: 1.8;
+}
+
+/* standard Portrait (aspect ratio < 1 && > .75 ) properties */
+.standard-p #PinesForegroundRight{
+	right: 76%;
+	bottom: -16%;	
+	zoom: 1.5;
+	-ms-zoom: 1.5;
+}
+
+.standard-p #PinesForegroundLeft{
+	left: 76%;
+	bottom: -16%;	
+	zoom: 1.5;
+	-ms-zoom: 1.5;
+	-moz-zoom: 1.5;
+}
+
+.standard-p #Flowers{
+	left: 25%;
+	bottom: -8%;
+	zoom: 1.5;
+	-ms-zoom: 1.5;
+}
+
+.standard-p #Flowers2{
+	display: none;
+}
+
+.standard-p #Cabin{
+	right: -8%;
+	top: 5%;
+	zoom: 1.75;
+	-ms-zoom: 1.75;
+}
+
+.standard-p #Us{
+	width: 1000px;
+	left: calc(50% - 495px);
+	bottom: 10%;	
+}
+
+.standard-p #Sky{
+	left: 0%;	
+	top: -4%;
+}
+
+.standard-p #Mountain{
+	left:0%;
+	top:13%;	
+	width: 2100px;
+}
+
+.standard-p #Mountain2{
+	display: none;
+}
+
+.standard-p #STD{
+	left: 3%;
+	bottom:50%;
+	zoom: 2.7;
+	-ms-zoom: 2.7;
+}
+
+.standard-p #Who{
+	left: 17%;
+	bottom: 9%;
+	zoom: 1.4;
+	-ms-zoom: 1.4;
+}
+
+.standard-p #Where{
+	left: 54%;
+	bottom: 51.5%;
+	zoom: 2.4;
+	-ms-zoom: 2.4;
+}
+
+/* Portrait/Phone Scene (aspect ratio < 1 or width < 768 ) properties */
+.phone #PinesForegroundRight{
+	display: none;
+}
+
+.phone #PinesForegroundLeft{
+	display: none;
+}
+
+.phone #Flowers{
+	display: none;
+}
+
+.phone #Flowers2{
+	display: none;
+}
+
+.phone #Cabin{
+	position: static;
+	width: 100%;
+	height: auto;
+	
+}
+
+.phone #Us{
+	width: 1000px;
+	left: calc(50% - 495px);
+	bottom: 10%;	
+}
+
+.phone #Sky{
+		
+}
+
+.phone #Mountain{
+	left:0%;
+	top:13%;	
+	width: 2100px;
+}
+
+.phone #Mountain2{
+	display: none;
+}
+
+.phone #STD{
+	position: static;
+}
+
+.phone #Who{
+	position: static;
+}
+
+.phone #Where{
+	position: static;	
+}
+

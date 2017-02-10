@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Save The Date! M + L</title>
+	<link rel="shortcut icon" sizes="152x152" href="images/drawing/big_heart.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="images/drawing/big_heart.png">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<STYLE>#LoadMessage{
+		background: url('images/drawing/big_heart.png') no-repeat 50% 50%;
+		width: 152px; height: 152px;
+		text-align: center;	line-height: 140px;
+		color: #000; font-weight: bold; font-size: 24px;
+		position: absolute; left: calc(50% - 76px); top: calc(50% - 76px);
+	} @media screen and (max-width: 699px){#LoadMessage{top: 10%;}}
+	</STYLE>
+	<script type="text/javascript">if(navigator.appVersion.match(/MSIE 8|MSIE 7|MSIE 6|MSIE 5|MSIE 4/)){window.location.replace('./images/drawing/screenshot.jpg');}</script>	
+	<script type="text/javascript" src="scripts/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles/style-final.css" />
+</head>
+<body>	
+	<div id="container">		
+		<div id="LoadMessage">Loading</div>
+		<div id="Sky"><img src="images/drawing/sky-blur.jpg" alt="Sky" class="fader" data-fade-delay="250" /></div>
+		<div id="Mountain"><img src="images/drawing/mountains-alt.png" alt="Mountains" class="fader" data-fade-delay="0" /></div>
+		<div id="Mountain2"><img src="images/drawing/mountains-alt.png" alt="Mountains" class="fader" data-fade-delay="0" /></div>
+		<ul id="scene">
+			<li class="layer" data-depth=".06">
+				<div id="Cabin"><img src="images/drawing/cabin-8bit.png" alt="Cabin" class="fader" data-fade-delay="400" /></div>
+			</li>
+			<li class="layer" data-depth=".5">
+				<div id="Us"><img src="images/drawing/us-8bit-rot.png" alt="Us" class="fader" data-fade-delay="700" /></div>
+			</li>						
+			<li class="layer" data-depth=".7">
+				<div id="PinesForegroundLeft"><img  src="images/drawing/pines.png" alt="pine" class="fader" data-fade-delay="1000" /></div>
+				<div id="PinesForegroundRight"><img src="images/drawing/pine.png" alt="pine" class="fader" data-fade-delay="1000" /></div>
+			</li>
+			<li class="layer" data-depth=".8">				
+				<div id="Flowers"><img src="images/drawing/flowerclump.png" alt="flower" class="fader" data-fade-delay="900" /></div>
+				<div id="Flowers2"><img src="images/drawing/flowerclump.png" alt="flower" class="fader" data-fade-delay="900" /></div>
+			</li>
+			<li class="layer fader" data-depth="1" data-fade-delay="1100">
+				<div id="Combo"><img src="images/drawing/std-who-where-shadow.png" alt="who" /></div>
+				<div id="Who"><img src="images/drawing/who-shadow.png" class='horizontal' alt="who" /><img src="images/drawing/who-v-shadow.png" alt="who" class='vertical' /></div>
+				<div id="STD"><img src="images/drawing/std-shadow.png" alt="std" /></div>
+				<div id="Where"><img src="images/drawing/where-shadow.png" alt="where" /></div>
+			</li>		
+		</ul>
+	</div>
+	<script type="text/javascript" src="scripts/jquery.parallax.min.js"></script>
+	<script type="text/javascript">		
+		var imageCount = $('#container IMG').length;
+		var sceneInitialized = false;
+		var scene = $('#scene').parallax('disable');		
+
+		function imageLoaded(){
+			imageCount--;
+			if (imageCount <= 0  && !sceneInitialized){
+				setTimeout(function(){fadeInScene();}, 150);
+			}
+		}
+
+		function fadeInScene(){
+			$('#LoadMessage').addClass('fadeOut');
+			$('.fader').each(function(){
+				var layer = this;
+				setTimeout(function(){$(layer).addClass('fadeIn')}, $(layer).data('fade-delay'));
+			});
+			sceneInitialized = true;
+		}		
+		
+		function setAspectRatioClass(aspectRatio){
+			if (window != window.top && aspectRatio >= 1.6){
+				$('body').removeClass('phone standard-p').addClass('standard');
+			}
+			else if (aspectRatio >= 1.6){
+				$('body').removeClass('phone standard standard-p');
+			}
+			else if (aspectRatio < 1.6 && aspectRatio >= 1.1){
+				$('body').removeClass('phone standard-p').addClass('standard');
+			}
+			else if (aspectRatio < 1.1 && aspectRatio >= .7){
+				$('body').removeClass('standard phone').addClass('standard-p');
+			}
+			else{
+				$('body').removeClass('standard standard-p').addClass('phone');
+			}			
+		}		
+
+		function calcLayout(){
+			var sWidth = $(window).width();
+			var sHeight = $(window).height();
+			var aspectRatio = sWidth / sHeight;
+			setAspectRatioClass(aspectRatio);						
+			if ($('body').hasClass('phone')){				
+				$('#container, #scene').css({'width': '100%', 'height': (sWidth * 4.75)});
+				$('#container #scene .layer').css({'transform': 'translate3D(0,0,0)'});
+				scene.parallax('limit', 0, 0);				
+				scene.parallax('disable');				
+ 			}
+ 			else{				
+				var xSlide = (aspectRatio < 1.6 ? 5 : 9);
+				var ySlide = (aspectRatio < 1.6 ? 4 : 5);
+				
+				scene.parallax('scalar', xSlide, ySlide);
+				scene.parallax('limit', false, false);				
+				scene.parallax('enable');				
+				$('#container, #scene').css({'width': sWidth, 'height': sHeight})				
+				$('#Combo IMG').css({'max-height': (sHeight * .87+'px')});		
+ 			}
+		}
+
+		$(function(){
+			$(window).resize(function(){calcLayout();}).on('orientationchange', function(){calcLayout();});
+			$('#container IMG').one('load', function(){imageLoaded();}).each(function(){if(this.complete) $(this).load();});						
+		});		
+		calcLayout();
+	</script>
+</body>
+</html>
